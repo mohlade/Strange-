@@ -94,4 +94,9 @@ export function getSport(id: SportId): SportConfig {
   return SPORTS.find((s) => s.id === id) ?? SPORTS[0];
 }
 
-export const REGIONS = "eu,us,uk";
+/**
+ * Odds API regions to query. Each extra region multiplies credit cost per
+ * request — keep the list short on the free tier. Override with ODDS_REGIONS
+ * (e.g. "eu,uk") once you're on a paid plan.
+ */
+export const REGIONS = process.env.ODDS_REGIONS ?? "eu";
