@@ -64,7 +64,9 @@ async function httpSidecar<T = Record<string, unknown>>(
       method: input ? "POST" : "GET",
       headers,
       body: input,
-      signal: AbortSignal.timeout(25_000),
+      // Generous window: free-tier hosts (e.g. Render) cold-start the
+      // sidecar after ~15 min idle, which can take 30-60s to wake.
+      signal: AbortSignal.timeout(55_000),
       cache: "no-store",
     });
     if (!res.ok) return null;
