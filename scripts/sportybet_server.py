@@ -152,7 +152,8 @@ class Handler(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("SPORTYBET_PORT", "8080"))
+    # Render/Railway inject PORT; SPORTYBET_PORT stays as a manual override.
+    port = int(os.environ.get("PORT") or os.environ.get("SPORTYBET_PORT") or "8080")
     server = ThreadingHTTPServer(("0.0.0.0", port), Handler)
     print(f"sportybet sidecar listening on :{port}", flush=True)
     server.serve_forever()
