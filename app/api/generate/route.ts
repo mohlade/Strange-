@@ -149,7 +149,7 @@ async function buildCatalogRanked(
     const events = await fetchSportyEvents(sport);
     if (events.length === 0) continue;
     const games = generateCatalogGames(sport, events, { day: config.day, offset: config.tzOffset });
-    catalogGames.push(...(games.length > 0 ? games : generateCatalogGames(sport, events, { day: "any" })));
+    catalogGames.push(...games);
   }
   if (catalogGames.length === 0) return null;
   let poolPicks = analyzeGames(catalogGames, config);

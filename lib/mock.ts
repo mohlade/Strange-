@@ -420,11 +420,6 @@ export async function generateFallbackGames(
     if (events.length > 0) {
       const games = generateCatalogGames(sport, events, opts);
       if (games.length > 0) return games;
-      // The requested day may have no upcoming (unstarted) fixtures, e.g. late
-      // evening when every match has already kicked off. Widen to any day so
-      // the picks still come from real, bookable SportyBet fixtures.
-      const anyGames = generateCatalogGames(sport, events, { ...opts, day: "any" });
-      if (anyGames.length > 0) return anyGames;
     }
   } catch (err) {
     console.error("SportyBet catalog fallback failed:", err);
